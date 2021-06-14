@@ -1,5 +1,6 @@
 import { registerApplication, start } from "single-spa";
 import "./index.css";
+import "./app";
 
 registerApplication({
     name: "@note/navigation",

@@ -7,6 +7,7 @@ import Tabs from "./components/Tabs";
 import Logo from "./assets/logo.svg";
 import LogoDark from "./assets/logo-dark.svg";
 import ThemeSwitch from "./components/ThemeSwitch";
+import { changeTheme } from "./dispatchEvents";
 
 export default function Root() {
   const [isDark, setIsDark] = useState<boolean>(
@@ -16,12 +17,7 @@ export default function Root() {
   );
 
   useEffect(() => {
-    let container = document.getElementsByClassName("app-root")[0];
-    if (isDark) {
-      container.classList.add("app-root--dark");
-    } else {
-      container.classList.remove("app-root--dark");
-    }
+    changeTheme(isDark);
   }, [isDark]);
 
   return (

@@ -5,7 +5,8 @@ import styled from 'styled-components'
 
 interface Proptypes {
     todoList: Todo[]
-    checkTodo(id: number): void
+    checkTodo(id: number): void,
+    isDark: boolean
 }
 
 const ListContainer = styled.ul`
@@ -14,12 +15,12 @@ const ListContainer = styled.ul`
     overflow: auto;
 `
 
-function TodoList({ todoList, checkTodo }: Proptypes) {
+function TodoList({ todoList, checkTodo, isDark }: Proptypes) {
     return (
         <ListContainer>
             {
                 todoList.map(todo => {
-                    return <TodoItem key={todo.id} {...todo} checkTodo={checkTodo} id={todo.id} />
+                    return <TodoItem key={todo.id} {...todo} checkTodo={checkTodo} id={todo.id} isDark={isDark} />
                 })
             }
         </ListContainer>

@@ -1,9 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const ButtonMain = styled.button`
     border-radius: 15px;
-    border: 2px solid var(--secondary-light);
+    ${({theme}) => {
+        console.log(theme)
+        return css`
+            border: 2px solid ${theme.borderColor};
+            color: ${theme.textColor};
+        `
+    }}
     display: flex;
     img {
         width: 14px;

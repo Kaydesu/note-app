@@ -15,17 +15,18 @@ export interface Todo {
 
 export default function Root() {
     const [todoList, setTodoList] = useState<Todo[]>([]);
+    const [isDark, setIsDark] = useState<boolean>(false);
 
-    console.log(localStorage.getItem("dark-theme"));
+    const onThemeChanged = (e: CustomEvent):void => {
+        setIsDark(e.detail.isDark);
+    }
 
     useEffect(() => {
         fetchTodo();
-        window.addEventListener("storage", () => {
-            console.log(localStorage.getItem("dark-theme"));
-        });
-        let event = document.createEvent("Event");
-        event.initEvent("storage", true, true);
-        window.dispatchEvent(event);
+        window.addEventListener("themeChanged", onThemeChanged);
+        return () => {
+            window.removeEventListener("themeChanged", onThemeChanged);
+        }
     }, []);
 
     const checkTodo = (id: number): void => {
@@ -46,7 +47,7 @@ export default function Root() {
     return (
         <>
             <TodoListRoot className="todo-list-root">
-                <TodoList todoList={todoList} checkTodo={checkTodo} />
+                <TodoList todoList={todoList} checkTodo={checkTodo} isDark={isDark}/>
             </TodoListRoot>
         </>
     );

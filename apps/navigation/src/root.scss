@@ -1,0 +1,89 @@
+.navigation-root {
+  .navigation__top {
+    position: relative;
+    text-align: center;
+    padding: 15px 0;
+
+    border-bottom: 3px solid var(--secondary-light);
+    .app-logo {
+      width: 150px;
+    }
+
+    .theme-switch {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      bottom: 0;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      color: var(--secondary-light);
+      transition: color 0.3s ease-in-out;
+      svg {
+        width: 40px;
+      }
+    }
+  }
+
+  .navigation__bottom {
+    .navigation-tabs {
+      display: flex;
+      width: 40%;
+      margin: 0 auto;
+      padding: 5px 0;
+      border-bottom: 3px solid var(--secondary-light);
+      justify-content: space-evenly;
+      position: relative;
+
+      &__tabpane {
+        cursor: pointer;
+        &:hover {
+          font-weight: 500;
+        }
+        &--active {
+          font-weight: 500;
+        }
+      }
+
+      .tab-marker {
+        position: absolute;
+        height: 3px;
+        width: 50%;
+        background-color: var(--black);
+        bottom: -3px;
+        transition: left 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.navigation-root--dark {
+  .navigation__top {
+    border-bottom: 3px solid var(--white);
+
+    .theme-switch {
+      color: var(--secondary-dark);
+    }
+  }
+
+  .navigation__bottom {
+    .navigation-tabs {
+      border-bottom: 3px solid var(--white);
+
+      &__tabpane {
+        a {
+          color: var(--white);
+        }
+        &--active {
+          a {
+            color: var(--secondary-dark);
+          }
+        }
+      }
+
+      .tab-marker {
+        background-color: var(--secondary-dark);
+      }
+    }
+  }
+}

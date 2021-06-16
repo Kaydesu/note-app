@@ -6,4 +6,4 @@ export interface StoreState {
   contacts: Contact[],
 }
 
-export const store: IModuleStore<any> = createStore({});
+export const store: IModuleStore<StoreState> = createStore({});

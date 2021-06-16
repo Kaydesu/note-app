@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { ButtonDanger, ButtonSuccess } from "../Buttons";
+import { ButtonDanger, ButtonSuccess } from "../commons/Buttons";
 import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
 import { CardList, CardItem } from "./Styled";
@@ -12,13 +12,11 @@ import { ContactModule } from "../../redux/Contact/ContactModule";
 
 interface InfoListProps {
   contacts: Contact[];
-  getContacts();
   deleteContacts(id: string);
 }
 
-const InfoList: React.FC<InfoListProps> = ({
+const InfoList: React.FunctionComponent<InfoListProps> = ({
   contacts,
-  getContacts,
   deleteContacts,
 }) => {
   return (

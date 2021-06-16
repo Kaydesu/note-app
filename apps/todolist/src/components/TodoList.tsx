@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todo } from '../root.component'
+import { Todo } from '../App'
 import TodoItem from './TodoItem'
 import styled from 'styled-components'
 

@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+
+
 
 export const CardList = styled.div`
   margin-top: 50px;
@@ -11,10 +13,17 @@ export const CardItem = styled.article`
   padding-bottom: 20px;
   margin-bottom: 35px;
   border-radius: 15px;
-  background: var(--white);
   width: 70%;
   margin: 0 auto 35px auto;
-  box-shadow: 2px 2px 8px rgba(193, 187, 134, 0.58);
+
+  ${({theme}) => {
+    return css`
+      color: ${theme.textColor};
+      background: ${theme.cardBodyColor};
+      box-shadow: ${theme.cardBodyShadow};
+    `
+  }}
+
 
   .card-item__header {
     display: flex;

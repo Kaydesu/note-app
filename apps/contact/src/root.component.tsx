@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import styled, { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import { store } from "./store";
-import InfoList from "./components/InfoList";
+import InfoList from "./components/InfoList/InfoList";
 import { DarkTheme, BaseTheme } from "./themes";
 
 

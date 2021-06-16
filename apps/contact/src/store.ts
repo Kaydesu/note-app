@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from './reducers';
+import { createStore, IModuleStore } from "redux-dynamic-modules";
+import { Contact } from "./redux/Contact/ContactModule";
 
 
-export const store = createStore(rootReducer);
+export interface StoreState {
+  contacts: Contact[],
+}
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const store: IModuleStore<any> = createStore({});

@@ -8,6 +8,10 @@ export function contactReducer(
   switch (action.type) {
     case ContactActionTypes.REQUEST_CONTACT:
       return action.payload;
+    case ContactActionTypes.ADD_CONTACT:
+      let newContactList = [...state];
+      newContactList.unshift(action.payload);
+      return newContactList;
     case ContactActionTypes.DELETE_CONTACT:
       return state.filter(item => item.id !== action.payload);
     default:

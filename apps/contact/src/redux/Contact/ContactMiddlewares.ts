@@ -1,14 +1,19 @@
 import { Middleware } from "redux";
-import { ContactActionUnion, ContactActionTypes } from "./ContactActions";
+import { ContactActionUnion, ContactActionTypes, ContactActions } from "./ContactActions";
+import { v4 as uuidv4 } from 'uuid';
 
-const idSetter: Middleware =
+const formatNewContact: Middleware =
   ({ dispatch }) =>
   (next) =>
   (action: ContactActionUnion) => {
-    if(action.type === ContactActionTypes.ADD_CONTACT) {
-      console.log("Added contact:", action.payload)
+    if(action.type === ContactActionTypes.NEW_CONTACT) {
+      let newContact = {
+        ...action.payload,
+        id: uuidv4()
+      }
+      dispatch(ContactActions.addContact(newContact));
     }
     next(action);
   };
 
-export const ContactMiddlewares = [idSetter];
+export const ContactMiddlewares = [formatNewContact];

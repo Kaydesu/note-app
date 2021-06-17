@@ -3,22 +3,29 @@ import { connect } from "react-redux";
 import { ButtonDanger, ButtonSuccess } from "../commons/Buttons";
 import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
-import { CardList, CardItem } from "./Styled";
+import { CardList, CardItem } from "./InfoList.styled";
 import { Contact } from "../../redux/Contact/ContactModule";
 import { StoreState } from "../../store";
 import { ContactActions } from "../../redux/Contact/ContactActions";
 import { DynamicModuleLoader } from "redux-dynamic-modules";
 import { ContactModule } from "../../redux/Contact/ContactModule";
+import { ModalActions } from "../../redux/Modal/ModalActions";
 
 interface InfoListProps {
   contacts: Contact[];
   deleteContacts(id: string);
+  openModal(meta?: object);
 }
 
 const InfoList: React.FunctionComponent<InfoListProps> = ({
   contacts,
   deleteContacts,
+  openModal,
 }) => {
+  const openModalWithData = (data) => {
+    openModal(data);
+  };
+
   return (
     <CardList>
       {contacts.map((cardItem) => {
@@ -27,7 +34,7 @@ const InfoList: React.FunctionComponent<InfoListProps> = ({
             <div className="card-item__header">
               <div className="card-item__header-title">{cardItem.name}</div>
               <div className="card-item__header-actions">
-                <ButtonSuccess>
+                <ButtonSuccess onClick={() => openModalWithData(cardItem)}>
                   {" "}
                   Edit <img src={EditIcon} alt="" />{" "}
                 </ButtonSuccess>
@@ -55,7 +62,10 @@ const mapStateToProps = (state: StoreState) => {
   };
 };
 
-const ConnectedInfoList = connect(mapStateToProps, ContactActions)(InfoList);
+const ConnectedInfoList = connect(mapStateToProps, {
+  ...ContactActions,
+  ...ModalActions,
+})(InfoList);
 
 const DynamicInfoList = () => (
   <DynamicModuleLoader modules={[ContactModule]}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonMain } from "../commons/Buttons";
 import { InputText } from "../commons/Input";
-import { SearchWrapper } from "./Styled";
+import { SearchWrapper } from "./SearchBox.styled";
 
 const SearchBox: React.FunctionComponent = () => {
   return (
@@ -13,4 +13,3 @@ const SearchBox: React.FunctionComponent = () => {
 };
 
 export default SearchBox;
-

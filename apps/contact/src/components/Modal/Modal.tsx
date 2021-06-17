@@ -1,50 +1,47 @@
 import React, { useState } from "react";
-import { ModalMask, ModalWrapper, ModalHeader, ModalBody } from "./Styled";
-import { InputText } from "../commons/Input";
+import { connect } from "react-redux";
+import {
+  ModalMask,
+  ModalWrapper,
+  ModalHeader,
+  ModalBody,
+} from "./Modal.styled";
 import CloseIcon from "../../assets/close.svg";
-
-type FooterButton = {
-  name: string;
-  id: string;
-  onClick(): any;
-};
+import {
+  getModalMeta,
+  getVisibleState,
+} from "../../redux/Modal/ModalSeletectors";
+import { StoreState } from "../../store";
+import { ModalActions } from "../../redux/Modal/ModalActions";
+import { Contact } from "../../redux/Contact/ContactModule";
+import ContactForm from "../ContactForm/ContactForm";
 
 interface ModalProps {
-  renderContent(): React.ReactElement;
-  footerButtons: FooterButton[];
+  visible: boolean;
+  closeModal();
+  meta: Contact | null;
+  maskClosable?: boolean;
 }
 
-const Modal: React.FunctionComponent<any> = () => {
-  const [visible, setVisible] = useState<boolean>(true);
-
+const Modal: React.FunctionComponent<ModalProps> = ({
+  visible,
+  meta,
+  closeModal,
+  maskClosable = true,
+}) => {
   return (
     visible && (
       <>
-        <ModalMask />
+        <ModalMask onClick={maskClosable ? closeModal : null} />
         <ModalWrapper>
           <ModalHeader>
             <div className="header-title"> Add New Contact</div>
-            <div className="close-btn" onClick={() => setVisible(!visible)}>
+            <div className="close-btn" onClick={closeModal}>
               <img src={CloseIcon} />
             </div>
           </ModalHeader>
           <ModalBody>
-            <div className="form-group">
-              <span className="form-group__label"> Name </span>
-              <InputText className="form-group__input" />
-            </div>
-            <div className="form-group">
-              <span className="form-group__label"> E-mail </span>
-              <InputText className="form-group__input" />
-            </div>
-            <div className="form-group">
-              <span className="form-group__label"> Address </span>
-              <InputText className="form-group__input" />
-            </div>
-            <div className="form-group">
-              <span className="form-group__label"> Phone </span>
-              <InputText className="form-group__input" />
-            </div>
+            <ContactForm userData={meta} />
           </ModalBody>
         </ModalWrapper>
       </>
@@ -52,4 +49,13 @@ const Modal: React.FunctionComponent<any> = () => {
   );
 };
 
-export default Modal;
+const mapStateToProps = (state: StoreState) => {
+  return {
+    visible: getVisibleState(state),
+    meta: getModalMeta(state),
+  };
+};
+
+const ConnectedModal = connect(mapStateToProps, ModalActions)(Modal);
+
+export default ConnectedModal;

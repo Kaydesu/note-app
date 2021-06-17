@@ -12,8 +12,19 @@ export function contactReducer(
       let newContactList = [...state];
       newContactList.unshift(action.payload);
       return newContactList;
+    case ContactActionTypes.EDIT_CONTACT:
+      newContactList = [...state];
+      newContactList.map((contact) => {
+        if (contact.id === action.payload.id) {
+          contact.address = action.payload.address;
+          contact.name = action.payload.name;
+          contact.phone = action.payload.phone;
+          contact.mail = action.payload.mail;
+        }
+      });
+      return newContactList;
     case ContactActionTypes.DELETE_CONTACT:
-      return state.filter(item => item.id !== action.payload);
+      return state.filter((item) => item.id !== action.payload);
     default:
       return state;
   }

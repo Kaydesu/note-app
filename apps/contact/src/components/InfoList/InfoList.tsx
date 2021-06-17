@@ -10,6 +10,7 @@ import { ContactActions } from "../../redux/Contact/ContactActions";
 import { DynamicModuleLoader } from "redux-dynamic-modules";
 import { ContactModule } from "../../redux/Contact/ContactModule";
 import { ModalActions } from "../../redux/Modal/ModalActions";
+import { getContactState } from "../../redux/Contact/ContactSelectors";
 
 interface InfoListProps {
   contacts: Contact[];
@@ -58,7 +59,7 @@ const InfoList: React.FunctionComponent<InfoListProps> = ({
 
 const mapStateToProps = (state: StoreState) => {
   return {
-    contacts: state.contacts,
+    contacts: getContactState(state),
   };
 };
 

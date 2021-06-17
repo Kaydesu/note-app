@@ -45,14 +45,20 @@ export const ContactActions = {
   createNewContact: (contact: Contact): NewContactACtion => {
     return {
       type: ContactActionTypes.NEW_CONTACT,
-      payload: contact
-    }
+      payload: contact,
+    };
   },
   addContact: (contact: Contact): AddContactAction => {
     return {
       type: ContactActionTypes.ADD_CONTACT,
-      payload: contact
-    }
+      payload: contact,
+    };
+  },
+  editContact: (contact: Contact): EditContactAction => {
+    return {
+      type: ContactActionTypes.EDIT_CONTACT,
+      payload: contact,
+    };
   },
   getContacts: (): RequestContactAction => {
     return {
@@ -64,6 +70,6 @@ export const ContactActions = {
     return {
       type: ContactActionTypes.DELETE_CONTACT,
       payload: id,
-    }
-  }
+    };
+  },
 };

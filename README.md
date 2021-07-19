@@ -1,5 +1,5 @@
 # note-app
-Single-spa demo app
+Single-spa demo app on localhost PORT 9000
 
 Install root app dependency:
 ```cmd

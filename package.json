@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
-    "start": "webpack serve --port 9000 --env isLocal",
+    "start": "webpack serve --port 9000 --env isLocal ",
+    "install:contact": "cd apps/contact && npm install",
+    "install:navigation": "cd apps/navigation && npm install",
+    "install:todolist": "cd apps/todolist && npm install",
+    "postinstall": "npm run install:contact && npm run install:navigation && npm run install:todolist",
     "lint": "eslint src --ext js,ts,tsx",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
